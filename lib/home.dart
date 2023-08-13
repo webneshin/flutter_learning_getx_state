@@ -10,11 +10,23 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(HomeController.to.screenName),
+        title: GetBuilder<HomeController>(
+          builder: (logic) {
+            debugPrint('appbar builded');
+            return Text("Counter is ${logic.counter}");
+          },
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                HomeController.to.incrementCounter();
+              },
+              icon: Icon(Icons.add))
+        ],
       ),
       body: SafeArea(
-        child: GetBuilder<HomeController>(
-            builder: (logic) {
+        child: GetBuilder<HomeController>(builder: (logic) {
+          debugPrint('Column builded');
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -26,9 +38,13 @@ class HomeScreen extends StatelessWidget {
                         bottom: BorderSide(
                             color: Colors.black.withOpacity(0.1), width: 1))),
               ),
-              Expanded(child: TaskList(tasks: logic.tasks, onItemDeleteClick: (task){
-                logic.deleteTask(task);
-              },)),
+              Expanded(
+                  child: TaskList(
+                tasks: logic.tasks,
+                onItemDeleteClick: (task) {
+                  logic.deleteTask(task);
+                },
+              )),
               Container(
                 decoration: BoxDecoration(
                     border: Border(
@@ -47,12 +63,14 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    IconButton(onPressed: () {
-                      if (logic.textController.text.isNotEmpty){
-                        logic.insertTask(logic.textController.text);
-                        logic.textController.clear();
-                      }
-                    }, icon: const Icon(Icons.send))
+                    IconButton(
+                        onPressed: () {
+                          if (logic.textController.text.isNotEmpty) {
+                            logic.insertTask(logic.textController.text);
+                            logic.textController.clear();
+                          }
+                        },
+                        icon: const Icon(Icons.send))
                   ],
                 ),
               )

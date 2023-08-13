@@ -8,8 +8,8 @@ class HomeController extends GetxController {
   final textController = TextEditingController();
 
   final screenName = 'Home Screen';
-  final tasks = <Task>[].obs;
-  final counter = 0.obs;
+  final tasks = <Task>[];
+  int counter = 0;
 
   HomeController() {
     tasks.add(Task(0, 'First Task'));
@@ -27,6 +27,7 @@ class HomeController extends GetxController {
   }
 
   void incrementCounter() {
-    counter.value += 1;
+    counter += 1;
+    update();
   }
 }
