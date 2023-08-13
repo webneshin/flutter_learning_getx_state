@@ -10,12 +10,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: GetBuilder<HomeController>(
-          builder: (logic) {
-            debugPrint('appbar builded');
-            return Text("Counter is ${logic.counter}");
-          },
-        ),
+        title: Obx(() {
+          debugPrint('appbar builded');
+          return Text("Counter is ${HomeController.to.counter}");
+        }),
         actions: [
           IconButton(
               onPressed: () {
@@ -25,14 +23,15 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: GetBuilder<HomeController>(builder: (logic) {
+        child: Obx(() {
+          final logic=HomeController.to;
           debugPrint('Column builded');
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
                 padding: const EdgeInsets.all(16),
-                child: Text('Task List Length: 12'),
+                child: Text('Task List Length: ${logic.tasks.length}'),
                 decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(

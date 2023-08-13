@@ -8,8 +8,8 @@ class HomeController extends GetxController {
   final textController = TextEditingController();
 
   final screenName = 'Home Screen';
-  final tasks = <Task>[];
-  int counter = 0;
+  final tasks = <Task>[].obs;
+  final counter = 0.obs;
 
   HomeController() {
     tasks.add(Task(0, 'First Task'));
@@ -18,16 +18,13 @@ class HomeController extends GetxController {
 
   void deleteTask(Task task) {
     tasks.removeWhere((element) => element.id == task.id);
-    update();
   }
 
   void insertTask(String content) {
     tasks.add(Task(tasks.length, content));
-    update();
   }
 
   void incrementCounter() {
-    counter += 1;
-    update();
+    counter.value ++;
   }
 }
