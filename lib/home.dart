@@ -13,8 +13,7 @@ class HomeScreen extends StatelessWidget {
         title: Text(HomeController.to.screenName),
       ),
       body: SafeArea(
-        child: GetBuilder(
-            init: HomeController(),
+        child: GetBuilder<HomeController>(
             builder: (logic) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_learning_getx_state/home.dart';
+import 'package:flutter_learning_getx_state/home_controller.dart';
+import 'package:get/get.dart';
 
 void main() {
+  Get.lazyPut(() => HomeController());
   runApp(const MyApp());
 }
 
